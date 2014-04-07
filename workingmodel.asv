@@ -23,8 +23,7 @@ alphafunctions;
     %leaky integration with Euler method
     x=(1-dt./tau).*x+dt./tau.*x_0;
     m=m*(1-dt)./Taup +((Mp)*(dt./(Taup)));
-    %calculate actual conductance using probability of opening times
-    %maximum conductance
+    %calculate actual co
     gnmh(1)=g(1)*x(1)^4;          %potassium channels
     gnmh(2)=g(2)*x(2)^3*x(3);     %sodium channels
     gnmh(3)=g(3);                 %leak?
@@ -44,7 +43,6 @@ alphafunctions;
         I_plot(t_rec,:)=I;
         Im_plot(t_rec)=Im;
         m_plot(t_rec)=m;
-        nmhplot(t_rec,:)=x;
     end
 end  %time loop
 
