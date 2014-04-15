@@ -11,7 +11,7 @@ x=zeros(1,3);
 x(3)=1; 
 t_rec=0; 
 Vt=-56.2; 
-m=0.0474;
+m=0.0474; %probability of open M channels at resting potential of -65
 %Time step for integration;
 dt=0.01;
 
