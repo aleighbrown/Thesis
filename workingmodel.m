@@ -2,15 +2,16 @@
 %Integration of Hodgkin-Huxley equations with Euler method
 %
 
-clear; %when you run this through changingtau/max remove it from here
+%clear; %when you run this through changingtau/max remove it from here
 initialvals;
-taumax=608;
-g(4)=0.035;
-%g(4)=0.075;
+%taumax=608;
+%g(4)=0.035;
+g(4)=0.075;
 %g(4)=(8.4*10^-5);
 
 for t=-30:dt:1000
-    if t==20;I_ext=0.8; end%do something here 1 to 7 Hz
+    if t==20;I_ext=2; end%do something here 1 to 7 Hz
+    %if t==20;I_ext=(randi(30)/10); %do something here 1 to 7 Hz
     
    
     
@@ -49,11 +50,11 @@ alphafunctions;
         Im_plot(t_rec)=Im;
         Iextplot(t_rec)=I_ext;
     end
-    
-end  %time loop
+    end %time loop
+
 
 
 
 hold on
-plot(x_plot,y_plot, 'r'); xlabel('Time (mSec)');ylabel('Voltage(mV)')
+plot(x_plot,y_plot); xlabel('Time (mSec)');ylabel('Voltage(mV)');
 
