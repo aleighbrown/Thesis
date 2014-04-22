@@ -4,7 +4,7 @@
 
 %clear; %when you run this through changingtau/max remove it from here
 initialvals;
-%taumax=1000;
+taumax=1000;
 g(4)=0.035;
 %g(4)=0.075;
 %g(4)=(8.4*10^-5);
@@ -53,8 +53,7 @@ alphafunctions;
 end  %time loop
 
 
-%fig=figure;
-%=axes;
-%hold on
-%plot(x_plot,y_plot, 'r'); xlabel('Time (mSec)');ylabel('Voltage(mV)')
+
+hold on
+plot(x_plot,y_plot, 'r'); xlabel('Time (mSec)');ylabel('Voltage(mV)')
 
