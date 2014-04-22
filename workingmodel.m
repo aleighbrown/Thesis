@@ -10,7 +10,7 @@ g(4)=0.035;
 %g(4)=(8.4*10^-5);
 
 for t=-30:dt:1000
-    if t==20;I_ext=0.7; end%do something here 1 to 7 Hz
+    if t==20;I_ext=0.8; end%do something here 1 to 7 Hz
     
    
     
