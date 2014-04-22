@@ -1,6 +1,4 @@
-%Maximal conductances kd,na,leak,m-current
-%g(1)=6; g(2)=56; g(3)=0.02; g(4)=0.075; mS/cm^2 %take out g(4) when going
-%through changingmax
+%Maximal conductances kd,na,leak,m-current mS/cm^2 
 g(1)=6; g(2)=56; g(3)=(0.0205); %g(4)=0.075;
 %reversal potentials K,Na,Leak,M-current(same as K) mV
 E(1)=-90; E(2)=50; E(3)=-70.3; 
