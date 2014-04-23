@@ -2,7 +2,7 @@
 %Integration of Hodgkin-Huxley equations with Euler method
 %
 
-%clear; %when you run this through changingtau/max remove it from here
+clear; %when you run this through changingtau/max remove it from here
 initialvals;
 taumax=608;
 %g(4)=0.035;
