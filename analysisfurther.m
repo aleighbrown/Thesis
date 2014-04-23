@@ -17,9 +17,4 @@ end
 
 
 %then ACF
-[r lags]=xcorr(y_plot,'coeff');
-figure;
-plot(lags((find(lags==0)):end),r(((find(lags==0)):end)),'LineWidth', 2);
-title('ACF Correlogram');
-xlabel('Lags');
-ylabel('ACF');
+
