@@ -1,7 +1,7 @@
 %autocorrelation 
 
 
-A1=y_plot;
+A1=instanfire;
 A2=A1;
 
 for i=1:length(A2);
@@ -11,4 +11,5 @@ A2=[A2(2:end) 0];
 
 autocr(i)=r(2);
 end 
+plot(autocr)
 
