@@ -10,8 +10,9 @@ g(4)=0.075;
 %g(4)=(8.4*10^-5);
 
 
-for t=-30:dt:3000
+for t=-30:dt:1000
     if t==20;I_ext=1; end%do something here 1 to 7 Hz
+    %if t==500;I_ext=2; end
     %if t==20;I_ext=(randi(30)/10); %do something here 1 to 7 Hz
     
    
@@ -25,6 +26,8 @@ alphafunctions;
     Mcurrentfunctions;
     %t-type current
     tfastcurrent;
+    %t-type slower
+    tslowfunctions;
     %alpha and beta functions for the r-type current from Cav2_3
     rtypefunctions;
     
@@ -36,7 +39,7 @@ alphafunctions;
     mrInf=mAlpha*mrTau;
     hrTau=1/(hAlpha +hBeta);
     hrInf=hAlpha*hrTau;
-    
+    %now
    
     %leaky integration with Euler method
     x=(1-dt./tau).*x+dt./tau.*x_0;
@@ -45,6 +48,9 @@ alphafunctions;
     %integration for the fast-t-type current
     mt=(1-dt./mTau).*mt+dt./mTau.*mInf;
     ht=(1-dt./hTau).*ht+dt./hTau.*hInf;
+    %integration for the slow-t-type
+    mtslow=(1-dt./mtsTau).*mtslow+dt./mtsTau.*mtsInf;
+    htslow=(1-dt./htsTau).*htslow+dt./htsTau.*htsInf;
     %integration for r-type current
     mr=(1-dt./mrTau).*mr+dt./mrTau.*mrInf;
     hr=(1-dt./hrTau).*hr+dt./hrTau.*hrInf;
@@ -59,6 +65,7 @@ alphafunctions;
     
     Mcur=g(4)*m;  %conductance max of M-channels times probability ala Yamada
     Tcur = gCav3_3bar*mt*ht;%this is for the fast-t-type
+    Tslcur= gCav3_1bar*mtslow*htslow;
     %r current regulated by CaV2.3 calcium channel
     Rcur=gCav2_3*mr*hr;
    
@@ -67,9 +74,12 @@ alphafunctions;
     I=(gnmh.*(E-V));
     Im=(Mcur*(-90-V));%E of K -90
     It=(Tcur*(30-V));%ECa for this is 30 mV
+    Itslow=(Tslcur*(30-V));
     Ir=Rcur*(135-V);%reversal is 135 mV
+    
+    %Itslow;
     %update voltage of membrane
-    V=V+dt*(I_ext+(sum(I)+Im+Ir));
+    V=V+dt*(I_ext+(sum(I)+Im));
     %record some variables for plotting after equilibration
     if t>=0;
         t_rec=t_rec+1;
@@ -79,11 +89,13 @@ alphafunctions;
         Im_plot(t_rec)=Im;
         It_plot(t_rec)=It;
         Ir_plot(t_rec)=Ir;
+        Itslow_plot(t_rec)=Itslow;
         Iextplot(t_rec)=I_ext;
     end
     end %time loop
 
 
+    
 
 
 hold on

@@ -9,6 +9,14 @@ autocorr= autocorr(1:numLags);
 % normalize the autocorrelation
 autocorr = autocorr./autocorr(1);
 figure;
-%stem(autocorr);
+stem(autocorr);
+
+acf=xcorr(instanfire, 'Coef');
+%# Keep only the positive lags
+acf = acf( length(x)+1 : end );
+
+%# Plot your result
+stem(acf);
+
 
 plot(autocorr)
