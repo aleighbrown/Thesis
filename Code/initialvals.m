@@ -28,7 +28,7 @@ htslow=0.1508;
 
 
 
-%Time step for integration;
-dt=0.01;
+%time step
+ts=1;
 
 

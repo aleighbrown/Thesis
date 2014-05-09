@@ -9,11 +9,16 @@ taumax=608;
 %g(4)=0.035;
 g(4)=0.0750;
 %g(4)=(8.4*10^-5);
-%I_ext=(randi([5,15])/10);
-runtime=36000; %time of run in millisec
-I_ext=normrnd(.6,1,[1,(length(0:dt:runtime))]);
-x_plot=0:dt:runtime;
-y_plot=zeros(1,length(0:dt:runtime));
+
+%Time step for integration;
+dt=0.01;
+
+runtime=180000; %time of run in millisec
+I_ext=normrnd(.6,.5,[1,(length(0:dt:runtime))]); %normrnd(.6,.5,[1,(length(0:dt:runtime))]) gives 1 Hz
+x_plot=0:1:runtime;
+y_plot=zeros(1,length(0:1:runtime));
+Im_plot=zeros(1,length(0:1:runtime));
+
 for t=-30:dt:runtime;
     
      %do something here 1 to 7 Hz
@@ -87,14 +92,13 @@ alphafunctions;
     %update voltage of membrane
     V=V+dt*(I_ext(t_rec)+(sum(I)+Im));
     %record some variables for plotting after equilibration
-    if V> 47
-    y_plot(t_rec)=1; 
-    end
+    %if V> 47 y_plot(t_rec)=1; end
+    y_plot(t_rec)=V;
    
         
 %         
 %         I_plot(t_rec,:)=I;
-%         Im_plot(t_rec)=Im;
+         Im_plot(t_rec)=It;
 %         It_plot(t_rec)=It;
 %         Ir_plot(t_rec)=Ir;
 %         Itslow_plot(t_rec)=Itslow; %actually the fast current
@@ -102,8 +106,10 @@ alphafunctions;
     end
 
    
-
-
+% 
+% [spiketime maxtab]=spiketimelocator(y_plot,x_plot);
+% y_plot=zeros(1,length(0:dt:runtime));
+% y_plot(maxtab(:,1))=1;
      
 
 
