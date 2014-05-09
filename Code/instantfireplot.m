@@ -7,5 +7,5 @@ time=spiketime(2:end);
 
 plot(time,instanfire);
 title('Instantaneous Firing Rate over Time');
-xlabel('mS');
+xlabel('msec');
 ylabel('Firing Rate in Hz');

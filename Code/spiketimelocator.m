@@ -1,5 +1,5 @@
 %script to find the times that spikes occur
-function [spiketime]= spiketimelocator(v,x_plot);
+function [spiketime,maxtab]= spiketimelocator(v,x_plot);
 
 delta=50; %a spike is defined as occuring when the voltage goes from -~48-+50, which delta can be pretty much any large enough number here
 

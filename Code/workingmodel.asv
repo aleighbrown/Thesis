@@ -10,10 +10,8 @@ taumax=608;
 g(4)=0.0750;
 %g(4)=(8.4*10^-5);
 %I_ext=(randi([5,15])/10);
-runtime=36000; %time of run in millisec
+runtime=1000; %time of run in millisec
 I_ext=normrnd(.6,1,[1,(length(0:dt:runtime))]);
-x_plot=0:dt:runtime;
-y_plot=zeros(1,length(0:dt:runtime));
 for t=-30:dt:runtime;
     
      %do something here 1 to 7 Hz
@@ -87,20 +85,17 @@ alphafunctions;
     %update voltage of membrane
     V=V+dt*(I_ext(t_rec)+(sum(I)+Im));
     %record some variables for plotting after equilibration
-    if V> 47
-    y_plot(t_rec)=1; 
-    end
-   
-        
-%         
-%         I_plot(t_rec,:)=I;
-%         Im_plot(t_rec)=Im;
-%         It_plot(t_rec)=It;
-%         Ir_plot(t_rec)=Ir;
-%         Itslow_plot(t_rec)=Itslow; %actually the fast current
+    
+    
+        x_plot(t_rec)=t;
+        y_plot(t_rec)=V; %so get rid of this?
+        I_plot(t_rec,:)=I;
+        Im_plot(t_rec)=Im;
+        It_plot(t_rec)=It;
+        Ir_plot(t_rec)=Ir;
+        Itslow_plot(t_rec)=Itslow; %actually the fast current
     end
     end
-
    
 
 
