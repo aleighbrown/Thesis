@@ -11,10 +11,11 @@ E(1)=-90; E(2)=50; E(3)=-70.3;
 %Initialization of some variables
 I_ext=0; 
 V=-65; % 
-x=zeros(1,3); 
-x(3)=1; 
+x=[0.0082,0.0022,0.9996]; 
+
 t_rec=0; 
 Vt=-56.2; 
+
 m=0.0474; %probability of open M channels at resting potential of -65
 %fast t-type calcium channels
 mt=0.0208; % mt=mInf at resting voltage
