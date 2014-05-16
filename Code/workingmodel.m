@@ -11,10 +11,11 @@ g(4)=0.0750;
 %g(4)=(8.4*10^-5);
 
 %Time step for integration;
-dt=.01;
+dt=.03;
 
-runtime=1000; %time of run in millisec
-I_ext=repmat(.7,[1,(length(0:dt:runtime))])%normrnd(.6,.3,[1,(length(0:dt:runtime))]); 
+runtime=30000; %time of run in millisec
+I_ext=normrnd(.62,.5,[1,(length(0:dt:runtime))]); %repmat(.9,[1,(length(0:dt:runtime))]); 
+I_ext(1:(1.6667e+03))=0;
 x_plot=zeros(1,length(0:dt:runtime));
 y_plot=zeros(1,length(0:dt:runtime));
 Im_plot=zeros(1,length(0:dt:runtime));
@@ -41,6 +42,9 @@ alphafunctions;
     %alpha and beta functions for the r-type current from Cav2_3
     rtypefunctions;
     
+    %Tau_x and x_0 are defined with alpha and beta for Na and K
+    tau=1./(alpha+beta);   %time constant
+    x_0=alpha.*tau;    %steady-state equation
     %defining Tau and steady-state activation for r-type
     mrTau=1/(mAlpha+mBeta);
     mrInf=mAlpha*mrTau;
@@ -49,11 +53,11 @@ alphafunctions;
     %now
    
     %leaky integration with Euler method
-    %x=(1-dt./tau).*x+dt./tau.*x_0;
-    x=x+dt*((alpha.*(1-x))-(beta.*x));
+    x=(1-dt./tau).*x+dt./tau.*x_0;
+    %x=x+dt*((alpha.*(1-x))-(beta.*x));
     %integration for m-current
-    %m=(1-dt./taup).*m+dt./taup.*p;
-    m=m+dt*((p-m)/taup);
+    m=(1-dt./taup).*m+dt./taup.*p;
+    %m=m+dt*((p-m)/taup);
     %integration for the fast-t-type current
     mt=(1-dt./mTau).*mt+dt./mTau.*mInf;
     ht=(1-dt./hTau).*ht+dt./hTau.*hInf;
@@ -92,32 +96,33 @@ alphafunctions;
     %update voltage of membrane
     V=V+dt*(I_ext(t_rec)+(sum(I)+Im));
     %record some variables for plotting after equilibration
-    %if V> 47 y_plot(t_rec)=1; end
-    y_plot(t_rec)=V;
+     if V> 49.3
+        y_plot(t_rec)=1; end
+    %y_plot(t_rec)=V;
     x_plot(t_rec)=t;
    
         
-%         
-         I_plot(t_rec,:)=I;
-         Im_plot(t_rec)=Im;
-%         It_plot(t_rec)=It;
-%         Ir_plot(t_rec)=Ir;
-%         Itslow_plot(t_rec)=Itslow; %actually the fast current
+%         I_plot(t_rec,:)=I;
+%          Im_plot(t_rec)=Im;
+%          It_plot(t_rec)=It;
+% %         Ir_plot(t_rec)=Ir;
+% Itslow_plot(t_rec)=Itslow; %actually the fast current
     end
     end
 
    
-% 
-[spiketime maxtab]=spiketimelocator(y_plot,x_plot);
-binplot=zeros(1,length(0:dt:runtime));
-binplot(maxtab(:,1))=1;
-     
+% % 
+% [spiketime maxtab]=spiketimelocator(y_plot,x_plot);
+% binplot=zeros(1,length(0:dt:runtime));
+% binplot(maxtab(:,1))=1;
+%      
 
 
-%hold on
+% %hold on
+% beep
+% pause(0.5)
+% beep
 plot(x_plot,y_plot); xlabel('Time (ms)');ylabel('Voltage(mV)');
 
-%autocorr=autocorruse(instanfire);
-%plot(autocorr,'g'); title('Autocorrelation Function of IFR');xlabel('Time Lag');ylabel('ACF');set(gca,'xtick',[]);set(gca,'xticklabel',[])
 
 
