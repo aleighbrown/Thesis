@@ -5,20 +5,24 @@
 
 clear; %when you run this through changingtau/max remove it from here
 initialvals;
-taumax=608;
-%g(4)=0.035;
+taumax=1000;
+%g(4)=0.1;
 g(4)=0.0750;
 %g(4)=(8.4*10^-5);
 
 %Time step for integration;
 dt=.03;
 
-runtime=30000; %time of run in millisec
-I_ext=normrnd(.62,.5,[1,(length(0:dt:runtime))]); %repmat(.9,[1,(length(0:dt:runtime))]); 
-I_ext(1:(1.6667e+03))=0;
+runtime=180000; %time of run in millisec
+I_ext=normrnd(.59,.6,[1,(length(0:dt:runtime))]); 
+I_ext(1:ceil((1.6667e+03)))=0;
+
 x_plot=zeros(1,length(0:dt:runtime));
 y_plot=zeros(1,length(0:dt:runtime));
 Im_plot=zeros(1,length(0:dt:runtime));
+It_plot=zeros(1,length(0:dt:runtime));
+Ita_plot=zeros(1,length(0:dt:runtime));
+Ir_plot=zeros(1,length(0:dt:runtime));
 
 for t=-30:dt:runtime;
     
@@ -96,33 +100,43 @@ alphafunctions;
     %update voltage of membrane
     V=V+dt*(I_ext(t_rec)+(sum(I)+Im));
     %record some variables for plotting after equilibration
-     if V> 49.3
-        y_plot(t_rec)=1; end
+         if V> 49.3
+          y_plot(t_rec)=1; end
     %y_plot(t_rec)=V;
     x_plot(t_rec)=t;
    
         
 %         I_plot(t_rec,:)=I;
-%          Im_plot(t_rec)=Im;
-%          It_plot(t_rec)=It;
-% %         Ir_plot(t_rec)=Ir;
-% Itslow_plot(t_rec)=Itslow; %actually the fast current
+%           Im_plot(t_rec)=Im;
+%            It_plot(t_rec)=It;
+%            Ita_plot(t_rec)=Itslow;
+%         Ir_plot(t_rec)=Ir;
+
     end
     end
 
    
-% % 
-% [spiketime maxtab]=spiketimelocator(y_plot,x_plot);
-% binplot=zeros(1,length(0:dt:runtime));
-% binplot(maxtab(:,1))=1;
-%      
+% 
+%   [spiketime maxtab]=spiketimelocator(y_plot,x_plot);
+%   binplot=zeros(1,length(0:dt:runtime));
+%   binplot(maxtab(:,1))=1;
+     
 
 
 % %hold on
 % beep
 % pause(0.5)
 % beep
-plot(x_plot,y_plot); xlabel('Time (ms)');ylabel('Voltage(mV)');
+new_y=cleaner(y_plot,runtime);
+plot(new_y); xlabel('Time (ms)');ylabel('Voltage(mV)');
+%splot(new_y);
+%plot(new_y);
+% spiketime=spiketimelocator(new_y,x_plot);
+% figure;
+% hist(diff(spiketime));
+% cleaner;
+% binner;
 
 
 
+ 

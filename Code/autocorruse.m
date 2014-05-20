@@ -10,7 +10,7 @@ autocorr= autocorr(1:numLags);
 % normalize the autocorrelation
 autocorr = autocorr./autocorr(1);
 %figure;
-%stem(autocorr); ylabel('ACF')
+stem(autocorr); ylabel('ACF')
 
 
 end
