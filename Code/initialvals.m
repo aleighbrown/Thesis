@@ -3,7 +3,7 @@ g(1)=6; g(2)=56; g(3)=(0.0205); %g(4)=0.075;
 %gmax for the slow Tcurrent (mS/cm2) 
 gCav3_3bar = 0.08; 
 %gmax for the r-current ms/cm2
-gCav2_3= 0.12;
+gCav2_3= 0.08;
 %gmax for the fast Tcurrent (mS/cm2) 
 gCav3_1bar = 0.08; 
 %reversal potentials K,Na,Leak,M-current(same as K) mV

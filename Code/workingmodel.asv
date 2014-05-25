@@ -6,10 +6,10 @@
 clear; %when you run this through changingtau/max remove it from here
 initialvals;
 taumax=608;
-%g(4)=0.0250;
+g(4)=0.0250;
 %g(4)= 0.0417;
 %g(4)=0.0583;
-g(4)=0.0750;
+%g(4)=0.0750;
 
 %g(4)=(8.4*10^-5);
 
@@ -110,10 +110,10 @@ alphafunctions;
    
         
 %         I_plot(t_rec,:)=I;
-%             Im_plot(t_rec)=Im;
-%              It_plot(t_rec)=It;
-%              Ita_plot(t_rec)=Itslow;
-%          Ir_plot(t_rec)=Ir;
+%            Im_plot(t_rec)=Im;
+%             It_plot(t_rec)=It;
+%             Ita_plot(t_rec)=Itslow;
+%         Ir_plot(t_rec)=Ir;
 
     end
     end
@@ -132,11 +132,6 @@ alphafunctions;
 % beep
 new_y=cleaner(y_plot,runtime);
 plot(new_y); xlabel('Time (ms)');ylabel('Voltage(mV)');
-% hold on
-% plot(Im_plot);
-% plot(It_plot,'r');
-% plot(Ita_plot, 'g');
-% plot(Ir_plot,'k');
 %splot(new_y);
 %plot(new_y);
 % spiketime=spiketimelocator(new_y,x_plot);

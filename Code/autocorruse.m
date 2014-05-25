@@ -4,7 +4,7 @@ function [autocorr] = autocorruse(x)
 
 numLags = length(x)/2;
 x = detrend(x,0);
-xmagDFT = abs(fft(x)).^2;
+xmagDFT = (fft(x)).^2;
 autocorr = ifft(xmagDFT,'symmetric');
 autocorr= autocorr(1:numLags);
 % normalize the autocorrelation
